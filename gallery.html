@@ -836,22 +836,6 @@
                 });
             }
             
-            // Mobile Navigation Toggle
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const body = document.querySelector('body');
-            
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    hamburger.classList.toggle('active');
-                    navLinks.classList.toggle('active');
-                    body.classList.toggle('menu-open');
-                });
-            }
-            
             // Add masonry effect by adjusting image aspect ratio randomly
             // This creates a more dynamic, pinterest-style layout
             galleryItems.forEach(item => {

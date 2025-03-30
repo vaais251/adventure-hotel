@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Experience authentic local cuisine and international flavors at Adventure Saria Hotel's restaurant in Gilgit-Baltistan, Pakistan.">
+    <title>Dining - Adventure Saria Hotel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Additional styles specific to Dining page */
+        .dining-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/images/dining-hero-placeholder.jpg');
+            height: 70vh;
+        }
+        
+        .dining-section {
+            padding: 4rem 0;
+        }
+        
+        .restaurant-overview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            margin: 3rem 0;
+        }
+        
+        .restaurant-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .restaurant-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .restaurant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .highlight-boxes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: var(--snow-white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .highlight-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+        
+        .menu-section {
+            margin-top: 4rem;
+        }
+        
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .menu-tab {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--light-gray);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--dark-text);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-tab.active {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+        }
+        
+        .menu-tab:hover {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+        }
+        
+        .menu-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .menu-category {
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .menu-category.active {
+            display: block;
+        }
+        
+        .menu-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-blue);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .menu-items {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: start;
+            gap: 1.5rem;
+        }
+        
+        .menu-item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .menu-item-details h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-blue);
+        }
+        
+        .menu-item-price {
+            color: var(--warm-accent);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .special-tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .vegetarian {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .spicy {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .chef-special {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .testimonials {
+            padding: 60px 0;
+            background: #f9f9f9;
+            position: relative;
+        }
+        
+        .testimonials .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .testimonials .section-title:after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 15px auto 0;
+        }
+        
+        .testimonials-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .testimonial-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 10px auto;
+            max-width: 90%;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-quote-icon {
+            color: var(--primary-blue);
+            font-size: 24px;
+            opacity: 0.1;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-client {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .client-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 3px solid var(--light-blue);
+        }
+        
+        .client-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .client-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .client-name {
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .client-role {
+            color: #777;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .testimonial-rating {
+            color: #FFD700;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        .testimonial-nav-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #eee;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-nav-button:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 8px;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: var(--primary-blue);
+            transform: scale(1.2);
+        }
+        
+        /* Hide testimonials except the active one */
+        .testimonial-container:not(.active) {
+            display: none;
+        }
+        
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            .testimonials {
+                padding: 40px 0;
+            }
+            
+            .testimonial-container {
+                padding: 25px 20px;
+            }
+            
+            .testimonial-text {
+                font-size: 15px;
+            }
+            
+            .client-image {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .testimonial-container {
+                padding: 20px 15px;
+            }
+            
+            .testimonial-text {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            
+            .client-name {
+                font-size: 15px;
+            }
+            
+            .client-role {
+                font-size: 13px;
+            }
+            
+            .testimonial-rating {
+                font-size: 13px;
+            }
+        }
+        
+        .private-dining {
+            margin-top: 4rem;
+            background-color: var(--light-blue);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .private-dining-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        @media (max-width: 768px) {
+            .restaurant-overview {
+                flex-direction: column;
+            }
+            
+            .restaurant-image {
+                height: 300px;
+                order: -1;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+            }
+            
+            .menu-item-image {
+                width: 100%;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.png" alt="Adventure Saria Logo" class="logo-img">
+                    <h1>Adventure Saria</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rooms.html">Rooms & Rates</a></li>
+                    <li><a href="adventures.html">Adventures</a></li>
+                    <li><a href="dining.html" class="active">Dining</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="book-now">
+                <a href="booking.html" class="book-now-btn">Book Now</a>
+            </div>
+            <button class="hamburger" type="button" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero dining-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-wrapper">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">Mountain View Restaurant</h1>
+                <p class="tagline">Authentic flavors and breathtaking views</p>
+                <!-- Image preload for SEO and better management -->
+                <img src="assets/images/dining-hero-placeholder.jpg" alt="Dining at Adventure Saria Hotel" class="hidden-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurant Overview -->
+    <section class="dining-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2 class="section-title">Our Culinary Experience</h2>
+                <p>At Adventure Saria, dining is not just about nourishment; it's an integral part of your cultural journey through Gilgit-Baltistan. Our restaurant offers a perfect blend of authentic local cuisine and international flavors, prepared with locally-sourced, fresh ingredients that celebrate the rich agricultural heritage of the region.</p>
+            </div>
+            
+            <div class="restaurant-overview">
+                <div class="restaurant-info">
+                    <h3>Mountain View Restaurant</h3>
+                    <p>Perched on the hotel's top floor, our restaurant offers panoramic views of the majestic Karakoram Range. Our culinary team, led by Chef Ahmad, brings together traditional recipes passed down through generations with contemporary cooking techniques.</p>
+                    
+                    <p>Whether you're starting your day with a hearty breakfast before an adventure, enjoying a light lunch, or savoring a leisurely dinner while watching the sunset paint the mountains in golden hues, our restaurant provides the perfect backdrop for a memorable dining experience.</p>
+                    
+                    <h4>Opening Hours:</h4>
+                    <ul>
+                        <li><strong>Breakfast:</strong> 7:00 AM - 10:30 AM</li>
+                        <li><strong>Lunch:</strong> 12:30 PM - 3:00 PM</li>
+                        <li><strong>Dinner:</strong> 7:00 PM - 10:30 PM</li>
+                    </ul>
+                    
+                    <p><strong>Reservations:</strong> While hotel guests have priority seating, we welcome outside visitors. Reservations are recommended, especially for dinner service.</p>
+                </div>
+                <div class="restaurant-image">
+                    <img src="assets/images/restaurant-placeholder.jpg" alt="Mountain View Restaurant interior">
+                </div>
+            </div>
+            
+            <div class="highlight-boxes">
+                <div class="highlight-box">
+                    <div class="highlight-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Local Specialties</h3>
+                    <p>Experience authentic Gilgit-Baltistani cuisine made with traditional recipes and techniques.</p>
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Farm-to-Table</h3>
+                    <p>We source our ingredients from local farmers and our own organic garden.</p>
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>Panoramic Views</h3>
+                    <p>Enjoy your meal with spectacular mountain vistas as your backdrop.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="dining-section menu-section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            
+            <div class="menu-tabs">
+                <div class="menu-tab active" data-target="local">Local Specialties</div>
+                <div class="menu-tab" data-target="international">International Cuisine</div>
+                <div class="menu-tab" data-target="beverages">Beverages</div>
+                <div class="menu-tab" data-target="desserts">Desserts</div>
+            </div>
+            
+            <div class="menu-content">
+                <!-- Local Specialties Menu -->
+                <div class="menu-category active" id="local-menu">
+                    <h3 class="menu-title">Local Specialties</h3>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/chapshoro-placeholder.jpg" alt="Chapshoro">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Chapshoro <span class="special-tag chef-special">Chef's Special</span></h4>
+                                <p>A traditional Hunza meat pie filled with minced mutton, onions, and spices, baked to perfection.</p>
+                                <div class="menu-item-price">650 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/dowdo-placeholder.jpg" alt="Dowdo">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Dowdo</h4>
+                                <p>Wheat flour dumplings served in a rich walnut sauce, a hearty traditional dish from the valleys of Gilgit.</p>
+                                <div class="menu-item-price">550 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/harissa-placeholder.jpg" alt="Harissa">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Harissa <span class="special-tag spicy">Spicy</span></h4>
+                                <p>A warming local specialty of slow-cooked mutton with wheat and aromatic spices, perfect for cold evenings.</p>
+                                <div class="menu-item-price">750 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/tumoro-chai-placeholder.jpg" alt="Tumoro Chai">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Tumoro Chai</h4>
+                                <p>Traditional salty tea infused with local herbs, a staple beverage of the region, especially during winters.</p>
+                                <div class="menu-item-price">200 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/gyal-placeholder.jpg" alt="Gyal">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Gyal <span class="special-tag vegetarian">Vegetarian</span></h4>
+                                <p>A hearty pancake made from buckwheat flour, traditionally served with apricot oil and walnut paste.</p>
+                                <div class="menu-item-price">450 PKR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- International Cuisine Menu -->
+                <div class="menu-category" id="international-menu">
+                    <h3 class="menu-title">International Cuisine</h3>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/pasta-placeholder.jpg" alt="Mountain Mushroom Pasta">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Mountain Mushroom Pasta <span class="special-tag vegetarian">Vegetarian</span></h4>
+                                <p>Homemade pasta with wild local mushrooms, garlic, herbs, and Parmesan cheese.</p>
+                                <div class="menu-item-price">850 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/trout-placeholder.jpg" alt="Pan-Seared Trout">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Pan-Seared Trout <span class="special-tag chef-special">Chef's Special</span></h4>
+                                <p>Locally caught trout, pan-seared with butter, lemon, and herbs, served with seasonal vegetables.</p>
+                                <div class="menu-item-price">950 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/burger-placeholder.jpg" alt="Adventure Burger">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Adventure Burger</h4>
+                                <p>Beef patty with caramelized onions, local cheese, lettuce, and our special sauce, served with potato wedges.</p>
+                                <div class="menu-item-price">750 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/curry-placeholder.jpg" alt="Chickpea Curry">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Chickpea Curry <span class="special-tag vegetarian">Vegetarian</span> <span class="special-tag spicy">Spicy</span></h4>
+                                <p>A flavorful chickpea curry with tomatoes, onions, and aromatic spices, served with steamed rice.</p>
+                                <div class="menu-item-price">650 PKR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Beverages Menu -->
+                <div class="menu-category" id="beverages-menu">
+                    <h3 class="menu-title">Beverages</h3>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/apricot-juice-placeholder.jpg" alt="Fresh Apricot Juice">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Fresh Apricot Juice</h4>
+                                <p>Freshly squeezed juice from Hunza's famous apricots, known for their sweetness and nutritional value.</p>
+                                <div class="menu-item-price">300 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/sea-buckthorn-placeholder.jpg" alt="Sea Buckthorn Tea">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Sea Buckthorn Tea <span class="special-tag chef-special">Chef's Special</span></h4>
+                                <p>Herbal tea made from local sea buckthorn berries, known for their health benefits and tangy flavor.</p>
+                                <div class="menu-item-price">250 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/mulberry-shake-placeholder.jpg" alt="Mulberry Shake">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Mulberry Shake</h4>
+                                <p>Creamy shake made with fresh mulberries, milk, and a touch of honey, a refreshing summer treat.</p>
+                                <div class="menu-item-price">350 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/kahwa-placeholder.jpg" alt="Kahwa">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Kahwa</h4>
+                                <p>Traditional green tea infused with saffron, cinnamon, cardamom, and almonds, a perfect end to any meal.</p>
+                                <div class="menu-item-price">200 PKR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Desserts Menu -->
+                <div class="menu-category" id="desserts-menu">
+                    <h3 class="menu-title">Desserts</h3>
+                    
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/phirni-placeholder.jpg" alt="Saffron Phirni">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Saffron Phirni <span class="special-tag chef-special">Chef's Special</span></h4>
+                                <p>A creamy rice pudding infused with local saffron and topped with crushed pistachios and dried fruits.</p>
+                                <div class="menu-item-price">400 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/walnut-cake-placeholder.jpg" alt="Walnut Cake">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Walnut Cake</h4>
+                                <p>Moist cake made with local walnuts and honey, served with a scoop of homemade apricot ice cream.</p>
+                                <div class="menu-item-price">450 PKR</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item">
+                            <div class="menu-item-image">
+                                <img src="assets/images/fruit-platter-placeholder.jpg" alt="Seasonal Fruit Platter">
+                            </div>
+                            <div class="menu-item-details">
+                                <h4>Seasonal Fruit Platter</h4>
+                                <p>A selection of fresh seasonal fruits including apricots, mulberries, apples, and more, depending on season.</p>
+                                <div class="menu-item-price">350 PKR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p><em>* Menu items and prices are subject to change based on seasonal availability</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Guests Say</h2>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-container active">
+                    <div class="testimonial-quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            "I've traveled extensively throughout Pakistan, and the Mountain View Restaurant at Adventure Saria offers some of the most authentic and delicious Gilgit-Baltistani cuisine I've ever tasted. The Chapshoro is not to be missed!"
+                        </div>
+                        <div class="testimonial-client">
+                            <div class="client-image">
+                                <img src="assets/images/testimonials/guest1-placeholder.jpg" alt="Sarah J.">
+                            </div>
+                            <div class="client-info">
+                                <div class="client-name">Sarah J.</div>
+                                <div class="client-role">Food Blogger from Germany</div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-container">
+                    <div class="testimonial-quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            "The combination of breathtaking mountain views and exceptional food made for unforgettable dining experiences during our stay. The chef's attention to detail and use of local ingredients was impressive. We particularly enjoyed the trout caught from nearby streams."
+                        </div>
+                        <div class="testimonial-client">
+                            <div class="client-image">
+                                <img src="assets/images/testimonials/couple-placeholder.jpg" alt="David and Emma">
+                            </div>
+                            <div class="client-info">
+                                <div class="client-name">David & Emma</div>
+                                <div class="client-role">United Kingdom</div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-container">
+                    <div class="testimonial-quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="testimonial-text">
+                            "The dining experience at Adventure Saria is a perfect blend of traditional flavors and modern presentation. Every meal was a delightful journey through the local culture. The staff was knowledgeable about each dish and provided excellent recommendations."
+                        </div>
+                        <div class="testimonial-client">
+                            <div class="client-image">
+                                <img src="assets/images/testimonials/guest3-placeholder.jpg" alt="Ahmed K.">
+                            </div>
+                            <div class="client-info">
+                                <div class="client-name">Ahmed K.</div>
+                                <div class="client-role">Lahore, Pakistan</div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-nav">
+                <div class="testimonial-nav-button">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="testimonial-dots">
+                    <div class="dot active"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="testimonial-nav-button">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Dining Section -->
+    <section class="private-dining">
+        <div class="container">
+            <div class="private-dining-content">
+                <h2 class="section-title">Private Dining & Special Occasions</h2>
+                <p>Looking to celebrate a special occasion or arrange a private dining experience? We offer customized services for anniversaries, birthdays, or intimate dinners.</p>
+                <p>Our chef can prepare a special menu tailored to your preferences, and we can arrange dining in unique locations around the property, including our rooftop terrace for starlit dinners or our garden pavilion for a more secluded experience.</p>
+                <a href="contact.html" class="book-now-btn">Inquire About Private Dining</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Adventure Saria</h2>
+                    <p>Discover Beauty and Adventure</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="rooms.html">Rooms & Rates</a></li>
+                        <li><a href="adventures.html">Adventures</a></li>
+                        <li><a href="dining.html">Dining</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Adventure Saria Hotel, Gilgit-Baltistan, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92 XXXXXXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@adventuresaria.com</p>
+                </div>
+                <div class="social-media">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Adventure Saria Hotel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu tab functionality
+            const menuTabs = document.querySelectorAll('.menu-tab');
+            
+            menuTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    menuTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Get the target menu
+                    const targetMenu = this.getAttribute('data-target');
+                    
+                    // Hide all menu categories
+                    document.querySelectorAll('.menu-category').forEach(category => {
+                        category.classList.remove('active');
+                    });
+                    
+                    // Show the target menu category
+                    document.getElementById(targetMenu + '-menu').classList.add('active');
+                });
+            });
+            
+            // Hamburger menu functionality
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Testimonials Slider Functionality
+            const testimonials = document.querySelectorAll('.testimonial-container');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.testimonial-nav-button:first-child');
+            const nextBtn = document.querySelector('.testimonial-nav-button:last-child');
+            let currentIndex = 0;
+            
+            // Function to show testimonial by index
+            function showTestimonial(index) {
+                // Hide all testimonials
+                testimonials.forEach(testimonial => {
+                    testimonial.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show the current testimonial and activate corresponding dot
+                testimonials[index].classList.add('active');
+                dots[index].classList.add('active');
+            }
+            
+            // Initial setup - show first testimonial
+            showTestimonial(currentIndex);
+            
+            // Next button click
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % testimonials.length;
+                showTestimonial(currentIndex);
+            });
+            
+            // Previous button click
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+                showTestimonial(currentIndex);
+            });
+            
+            // Dot clicks
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    currentIndex = index;
+                    showTestimonial(currentIndex);
+                });
+            });
+            
+            // Auto-advance testimonials every 5 seconds
+            let testimonialInterval = setInterval(function() {
+                currentIndex = (currentIndex + 1) % testimonials.length;
+                showTestimonial(currentIndex);
+            }, 5000);
+            
+            // Pause auto-advance on hover
+            const testimonialsSection = document.querySelector('.testimonials');
+            
+            testimonialsSection.addEventListener('mouseenter', function() {
+                clearInterval(testimonialInterval);
+            });
+            
+            testimonialsSection.addEventListener('mouseleave', function() {
+                testimonialInterval = setInterval(function() {
+                    currentIndex = (currentIndex + 1) % testimonials.length;
+                    showTestimonial(currentIndex);
+                }, 5000);
+            });
+            
+            // Mobile swipe functionality for testimonials
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            const handleGesture = () => {
+                if (touchEndX < touchStartX - 50) {
+                    // Swiped left - next testimonial
+                    currentIndex = (currentIndex + 1) % testimonials.length;
+                    showTestimonial(currentIndex);
+                }
+                
+                if (touchEndX > touchStartX + 50) {
+                    // Swiped right - previous testimonial
+                    currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+                    showTestimonial(currentIndex);
+                }
+            };
+            
+            testimonialsSection.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            testimonialsSection.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleGesture();
+            });
+        });
+    </script>
+    <script src="assets/js/chatbot.js"></script>
+    
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923144259666" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

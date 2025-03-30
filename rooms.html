@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our accommodation options at Adventure Saria Hotel in Gilgit-Baltistan - from luxury suites to budget-friendly rooms with stunning mountain views.">
+    <title>Rooms & Rates - Adventure Saria Hotel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Additional styles specific to Rooms page */
+        .rooms-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/images/rooms-hero-placeholder.jpg');
+            height: 60vh;
+        }
+        
+        .room-section {
+            padding: 4rem 0;
+        }
+        
+        .room-container {
+            margin-bottom: 4rem;
+            scroll-margin-top: 80px;
+        }
+        
+        .room-container:last-child {
+            margin-bottom: 0;
+        }
+        
+        .room-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .room-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .room-gallery {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .room-slider {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 350px;
+            position: relative;
+        }
+        
+        .room-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .room-title {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .room-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin: 1rem 0;
+        }
+        
+        .amenities-list {
+            list-style: none;
+            margin: 1.5rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+        }
+        
+        .amenities-list li {
+            padding: 0.5rem 0;
+        }
+        
+        .amenities-list i {
+            color: var(--primary-blue);
+            margin-right: 10px;
+        }
+        
+        .room-details .book-now-btn {
+            display: inline-block;
+            background-color: var(--warm-accent);
+            color: var(--light-text);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .room-details .book-now-btn:hover {
+            background-color: var(--dark-accent);
+            color: var(--light-text);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .currency-toggle {
+            background-color: var(--light-blue);
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .currency-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .currency-btn {
+            background-color: var(--snow-white);
+            border: 1px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .currency-btn.active {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+        }
+        
+        .currency-btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+        }
+        
+        @media (max-width: 768px) {
+            .room-content {
+                flex-direction: column;
+            }
+            
+            .room-gallery {
+                order: -1;
+            }
+            
+            .amenities-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.png" alt="Adventure Saria Logo" class="logo-img">
+                    <h1>Adventure Saria</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rooms.html" class="active">Rooms & Rates</a></li>
+                    <li><a href="adventures.html">Adventures</a></li>
+                    <li><a href="dining.html">Dining</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="book-now">
+                <a href="booking.html" class="book-now-btn">Book Now</a>
+            </div>
+            <button class="hamburger" type="button" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero rooms-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-wrapper">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">Rooms & Rates</h1>
+                <p class="tagline">Comfortable accommodations with breathtaking mountain views</p>
+                <!-- Image preload for SEO and better management -->
+                <img src="assets/images/rooms-hero-placeholder.jpg" alt="Rooms at Adventure Saria Hotel" class="hidden-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Currency Toggle Section -->
+    <section class="currency-toggle">
+        <div class="container">
+            <h2>View Prices In Your Preferred Currency</h2>
+            <div class="currency-buttons">
+                <button class="currency-btn active" data-currency="PKR">PKR (Pakistani Rupee)</button>
+                <button class="currency-btn" data-currency="USD">USD (US Dollar)</button>
+                <button class="currency-btn" data-currency="EUR">EUR (Euro)</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Listings -->
+    <section class="room-section">
+        <div class="container">
+            <!-- Luxury Suite -->
+            <div id="luxury" class="room-container">
+                <div class="room-content">
+                    <div class="room-details">
+                        <h2 class="room-title">Luxury Suite</h2>
+                        <p>Experience the pinnacle of comfort in our Luxury Suites, featuring spacious accommodations and premium views of the majestic Karakoram Range. Each suite is designed to provide an unforgettable experience, combining traditional Baltistani elements with modern luxury.</p>
+                        
+                        <div class="room-price" data-original="8000 PKR/night">8000 PKR/night</div>
+                        
+                        <h3>Amenities</h3>
+                        <ul class="amenities-list">
+                            <li><i class="fas fa-mountain"></i> Premium mountain views</li>
+                            <li><i class="fas fa-bed"></i> King-size bed</li>
+                            <li><i class="fas fa-couch"></i> Separate sitting area</li>
+                            <li><i class="fas fa-bath"></i> Private bathroom with shower</li>
+                            <li><i class="fas fa-wifi"></i> High-speed Wi-Fi</li>
+                            <li><i class="fas fa-temperature-low"></i> Heating</li>
+                            <li><i class="fas fa-mug-hot"></i> Tea/coffee facilities</li>
+                            <li><i class="fas fa-tv"></i> Flat-screen TV</li>
+                        </ul>
+                        
+                        <p>Our Luxury Suites are perfect for couples seeking a romantic getaway or travelers who desire extra space and comfort. Each suite is approximately 40 square meters and can accommodate up to 2 adults.</p>
+                        
+                        <a href="booking.html" class="book-now-btn">Book Now</a>
+                    </div>
+                    <div class="room-gallery">
+                        <div class="room-slider">
+                            <img src="assets/images/luxury-placeholder.jpg" alt="Luxury Suite interior" class="room-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Double Bed Room -->
+            <div id="double" class="room-container">
+                <div class="room-content">
+                    <div class="room-details">
+                        <h2 class="room-title">Double Bed Room</h2>
+                        <p>Our Double Bed Rooms offer a perfect balance of comfort and value, ideal for couples or friends traveling together. Enjoy beautiful views of the surrounding landscapes from your window while relaxing in a cozy, well-appointed space.</p>
+                        
+                        <div class="room-price" data-original="5000-6000 PKR/night">5000-6000 PKR/night</div>
+                        
+                        <h3>Amenities</h3>
+                        <ul class="amenities-list">
+                            <li><i class="fas fa-mountain"></i> Mountain views</li>
+                            <li><i class="fas fa-bed"></i> Double bed</li>
+                            <li><i class="fas fa-bath"></i> Private bathroom with shower</li>
+                            <li><i class="fas fa-wifi"></i> Wi-Fi</li>
+                            <li><i class="fas fa-temperature-low"></i> Heating</li>
+                            <li><i class="fas fa-mug-hot"></i> Tea/coffee facilities</li>
+                        </ul>
+                        
+                        <p>These comfortable rooms range from 25-30 square meters and are designed to provide all essential amenities for a pleasant stay. The room rate varies based on the specific view and floor location.</p>
+                        
+                        <a href="booking.html" class="book-now-btn">Book Now</a>
+                    </div>
+                    <div class="room-gallery">
+                        <div class="room-slider">
+                            <img src="assets/images/backgrounds/double-placeholder.jpg" alt="Double Bed Room interior" class="room-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Single Bed Room -->
+            <div id="single" class="room-container">
+                <div class="room-content">
+                    <div class="room-details">
+                        <h2 class="room-title">Single Bed Room</h2>
+                        <p>Our Single Bed Rooms are a budget-friendly option that doesn't compromise on comfort or experience. Perfect for solo travelers or backpackers who want a comfortable private room after a day of adventure in the mountains.</p>
+                        
+                        <div class="room-price" data-original="3000-4000 PKR/night">3000-4000 PKR/night</div>
+                        
+                        <h3>Amenities</h3>
+                        <ul class="amenities-list">
+                            <li><i class="fas fa-mountain"></i> Garden or courtyard view</li>
+                            <li><i class="fas fa-bed"></i> Single bed</li>
+                            <li><i class="fas fa-bath"></i> Private bathroom with shower</li>
+                            <li><i class="fas fa-wifi"></i> Wi-Fi</li>
+                            <li><i class="fas fa-temperature-low"></i> Heating</li>
+                        </ul>
+                        
+                        <p>At approximately 18-20 square meters, these cozy rooms offer everything you need for a comfortable stay. The room rate varies based on the specific view and floor location.</p>
+                        
+                        <a href="booking.html" class="book-now-btn">Book Now</a>
+                    </div>
+                    <div class="room-gallery">
+                        <div class="room-slider">
+                            <img src="assets/images/single-placeholder.jpg" alt="Single Bed Room interior" class="room-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Policies -->
+    <section class="room-section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Booking Policies</h2>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h3>Check-in/Check-out</h3>
+                <ul>
+                    <li>Check-in time: 2:00 PM</li>
+                    <li>Check-out time: 11:00 AM</li>
+                    <li>Early check-in and late check-out available upon request and subject to availability</li>
+                </ul>
+                
+                <h3>Cancellation Policy</h3>
+                <ul>
+                    <li>Free cancellation up to 7 days before arrival</li>
+                    <li>Cancellations made 3-7 days before arrival: 50% of the total booking amount will be charged</li>
+                    <li>Cancellations made less than 3 days before arrival: 100% of the total booking amount will be charged</li>
+                </ul>
+                
+                <h3>Children and Extra Beds</h3>
+                <ul>
+                    <li>Children under 5 years stay free when using existing bedding</li>
+                    <li>Extra beds are available for an additional charge of 1000 PKR per night</li>
+                </ul>
+                
+                <h3>Payment</h3>
+                <ul>
+                    <li>A 30% deposit is required to confirm your reservation</li>
+                    <li>Full payment can be made upon arrival</li>
+                    <li>We accept cash (PKR) and major credit cards</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Adventure Saria</h2>
+                    <p>Discover Beauty and Adventure</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="rooms.html">Rooms & Rates</a></li>
+                        <li><a href="adventures.html">Adventures</a></li>
+                        <li><a href="dining.html">Dining</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Adventure Saria Hotel, Gilgit-Baltistan, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92 XXXXXXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@adventuresaria.com</p>
+                </div>
+                <div class="social-media">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Adventure Saria Hotel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS for currency conversion -->
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Currency conversion functionality
+            const currencyButtons = document.querySelectorAll('.currency-btn');
+            const priceElements = document.querySelectorAll('.room-price');
+            
+            // Exchange rates (example rates)
+            const exchangeRates = {
+                'PKR': 1, // Base currency
+                'USD': 0.0036,
+                'EUR': 0.0033
+            };
+            
+            currencyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    currencyButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const currency = this.getAttribute('data-currency');
+                    const rate = exchangeRates[currency];
+                    
+                    // Update all price elements
+                    priceElements.forEach(element => {
+                        const originalText = element.getAttribute('data-original');
+                        
+                        if (currency === 'PKR') {
+                            // Show original PKR price
+                            element.textContent = originalText;
+                        } else {
+                            // Convert to selected currency
+                            if (originalText.includes('-')) {
+                                // Handle range prices (e.g., "5000-6000 PKR/night")
+                                const range = originalText.match(/(\d+)-(\d+)/);
+                                if (range) {
+                                    const lowerVal = parseInt(range[1]);
+                                    const upperVal = parseInt(range[2]);
+                                    
+                                    const lowerConverted = Math.round(lowerVal * rate);
+                                    const upperConverted = Math.round(upperVal * rate);
+                                    
+                                    element.textContent = `${lowerConverted}-${upperConverted} ${currency}/night (${originalText})`;
+                                }
+                            } else {
+                                // Handle single prices (e.g., "8000 PKR/night")
+                                const value = parseInt(originalText.match(/\d+/)[0]);
+                                const converted = Math.round(value * rate);
+                                
+                                element.textContent = `${converted} ${currency}/night (${originalText})`;
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="assets/js/chatbot.js"></script>
+    
+    <script>
+        // Direct hamburger menu functionality for this page
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    
+                    console.log('Hamburger menu toggled on rooms.html');
+                });
+            }
+        });
+    </script>
+    
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923144259666" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

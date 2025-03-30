@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Adventure Saria Hotel in Gilgit-Baltistan, Pakistan. Get directions, send us a message, or book your stay at our mountain retreat.">
+    <title>Contact Us - Adventure Saria Hotel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Additional styles specific to Contact page */
+        .contact-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/images/contact-hero-placeholder.jpg');
+            height: 60vh;
+        }
+        
+        .contact-section {
+            padding: 4rem 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-info {
+            padding: 2rem;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-method {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-method:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-icon i {
+            font-size: 1.25rem;
+        }
+        
+        .contact-details h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--dark-blue);
+        }
+        
+        .contact-details p {
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--dark-blue);
+            color: white;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        .contact-form {
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .btn-submit {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            background-color: var(--dark-blue);
+        }
+        
+        .map-section {
+            padding: 4rem 0;
+            background-color: var(--light-gray);
+        }
+        
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 450px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .transport-options {
+            margin-top: 3rem;
+        }
+        
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .transport-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .transport-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+        }
+        
+        .transport-icon i {
+            font-size: 2.5rem;
+        }
+        
+        .transport-details {
+            padding: 1.5rem;
+        }
+        
+        .transport-details h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--dark-blue);
+        }
+        
+        .transport-details p {
+            margin: 0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .transport-details p:last-child {
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .transport-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.png" alt="Adventure Saria Logo" class="logo-img">
+                    <h1>Adventure Saria</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rooms.html">Rooms & Rates</a></li>
+                    <li><a href="adventures.html">Adventures</a></li>
+                    <li><a href="dining.html">Dining</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </div>
+            <div class="book-now">
+                <a href="booking.html" class="book-now-btn">Book Now</a>
+            </div>
+            <button class="hamburger" type="button" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero contact-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-wrapper">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">Contact Us</h1>
+                <p class="tagline">We're here to answer your questions and help plan your perfect stay</p>
+                <!-- Image preload for SEO and better management -->
+                <img src="assets/images/contact-hero-placeholder.jpg" alt="Contact Adventure Saria Hotel" class="hidden-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2 class="section-title">Get In Touch</h2>
+                <p>Whether you have questions about our accommodations, adventure packages, or need assistance with your booking, our team is here to help. Reach out to us using any of the methods below or send us a message through the contact form.</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Address</h3>
+                            <p>Adventure Saria Hotel<br>Karakoram Highway, Near [Landmark]<br>Gilgit-Baltistan, Pakistan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p>Reservations: +92 XXXXXXXXXX<br>Front Desk: +92 XXXXXXXXXX<br>Adventure Desk: +92 XXXXXXXXXX</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>General Inquiries: info@adventuresaria.com<br>Reservations: book@adventuresaria.com<br>Adventure Planning: adventures@adventuresaria.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Hours</h3>
+                            <p>Front Desk: 24/7<br>Restaurant: 6:30 AM - 10:30 PM<br>Adventure Desk: 8:00 AM - 7:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Follow Us</h3>
+                            <p>Stay connected with us on social media for updates, special offers, and breathtaking photos.</p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <select id="subject" name="subject" class="form-control" required>
+                                <option value="">Select a subject</option>
+                                <option value="Reservation Inquiry">Reservation Inquiry</option>
+                                <option value="Adventure Package">Adventure Package</option>
+                                <option value="Special Event Planning">Special Event Planning</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Your Message *</label>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2 class="section-title">Find Us</h2>
+                <p>Adventure Saria Hotel is nestled in the heart of Gilgit-Baltistan, surrounded by breathtaking mountain landscapes. Use the map below to locate us and plan your journey to our mountain retreat.</p>
+            </div>
+            
+            <div class="map-container">
+                <!-- In a real implementation, replace with actual Google Maps embed code -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423286.27405770525!2d74.28054822753999!3d35.88024776183456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e649e3642543b1%3A0x40fd0ca3ca17282b!2sGilgit-Baltistan!5e0!3m2!1sen!2s!4v1629890812345!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            
+            <div class="transport-options">
+                <h3>Getting Here</h3>
+                <p>There are several ways to reach Adventure Saria Hotel from major cities in Pakistan:</p>
+                
+                <div class="transport-grid">
+                    <div class="transport-card">
+                        <div class="transport-icon">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="transport-details">
+                            <h3>By Air</h3>
+                            <p>Regular flights operate from Islamabad to Gilgit Airport. The hotel is approximately 25 minutes drive from the airport.</p>
+                            <p>Note: Flight schedules can vary based on weather conditions in the mountains.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="transport-card">
+                        <div class="transport-icon">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <div class="transport-details">
+                            <h3>By Bus</h3>
+                            <p>Comfortable bus services connect Islamabad to Gilgit. The journey takes approximately 12-15 hours along the scenic Karakoram Highway.</p>
+                            <p>NATCO and other private companies operate luxury buses with overnight services.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="transport-card">
+                        <div class="transport-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="transport-details">
+                            <h3>By Car</h3>
+                            <p>For those who enjoy driving, the Karakoram Highway offers one of the world's most spectacular road trips from Islamabad to Gilgit-Baltistan.</p>
+                            <p>We recommend experienced drivers only and to allow 2 days with an overnight stay en route.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="transport-card">
+                        <div class="transport-icon">
+                            <i class="fas fa-concierge-bell"></i>
+                        </div>
+                        <div class="transport-details">
+                            <h3>Hotel Transfers</h3>
+                            <p>We offer private transfer services from Gilgit Airport or Bus Station directly to Adventure Saria Hotel.</p>
+                            <p>Contact our reservation team to arrange a pickup when booking your stay.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Adventure Saria</h2>
+                    <p>Discover Beauty and Adventure</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="rooms.html">Rooms & Rates</a></li>
+                        <li><a href="adventures.html">Adventures</a></li>
+                        <li><a href="dining.html">Dining</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Adventure Saria Hotel, Gilgit-Baltistan, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92 XXXXXXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@adventuresaria.com</p>
+                </div>
+                <div class="social-media">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Adventure Saria Hotel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize EmailJS with your user ID
+            // Replace 'user_your_emailjs_userid' with your actual EmailJS user ID
+            (function() {
+                emailjs.init("user_your_emailjs_userid");
+            })();
+            
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    
+                    // Show loading state
+                    const submitBtn = contactForm.querySelector('.btn-submit');
+                    const originalBtnText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Prepare template parameters
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        from_phone: phone,
+                        subject: subject,
+                        message: message
+                    };
+                    
+                    // Send the email
+                    // Replace 'service_your_emailjs_serviceid' and 'template_your_emailjs_templateid' with your actual EmailJS service ID and template ID
+                    emailjs.send('service_your_emailjs_serviceid', 'template_your_emailjs_templateid', templateParams)
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                            
+                            // Reset form
+                            contactForm.reset();
+                            
+                            // Show success message
+                            alert('Your message has been sent successfully! We will get back to you soon.');
+                            
+                            // Reset button
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.disabled = false;
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                            
+                            // Show error message
+                            alert('Sorry, we couldn\'t send your message. Please try again later or contact us directly by phone.');
+                            
+                            // Reset button
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.disabled = false;
+                        });
+                });
+            }
+        });
+    </script>
+    <script>
+        // Direct hamburger menu functionality for this page
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    
+                    console.log('Hamburger menu toggled on contact.html');
+                });
+            }
+        });
+    </script>
+    <script src="assets/js/chatbot.js"></script>
+    
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923144259666" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

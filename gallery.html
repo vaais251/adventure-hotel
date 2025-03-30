@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse our gallery of Adventure Saria Hotel in Gilgit-Baltistan - see our accommodations, restaurant, and the stunning mountain landscapes of Pakistan's northern region.">
+    <title>Gallery - Adventure Saria Hotel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lg-zoom.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/css/lg-thumbnail.min.css">
+    
+    <!-- AOS (Animate On Scroll) Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Additional styles specific to Gallery page */
+        .gallery-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/images/gallery-hero-placeholder.jpg');
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-section {
+            padding: 4rem 0;
+            background-color: var(--snow-white);
+        }
+        
+        .gallery-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+        
+        .gallery-category-counts {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .category-count {
+            background: var(--light-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--dark-blue);
+            font-weight: 500;
+        }
+        
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            gap: 0.8rem;
+        }
+        
+        .gallery-filter {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--light-gray);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--dark-text);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-filter.active {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+            transform: translateY(-3px);
+        }
+        
+        .gallery-filter:hover {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            transform: translateY(-3px);
+        }
+        
+        .gallery-filter::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-filter.active::after,
+        .gallery-filter:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            transition: all 0.5s ease;
+            height: auto;
+            aspect-ratio: 1/1;
+            cursor: pointer;
+            transform-origin: center;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-item.hidden {
+            transform: scale(0);
+            height: 0;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(42, 107, 191, 0.85);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 2;
+            text-transform: capitalize;
+        }
+        
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: all 0.4s ease;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 50%;
+        }
+        
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gallery-item-title {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gallery-item-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .featured-item {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: 16/9;
+        }
+        
+        .virtual-tour-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-blue) 100%);
+            padding: 6rem 0;
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--light-text);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .virtual-tour-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/backgrounds/hero-placeholder.jpg');
+            opacity: 0.1;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .virtual-tour-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .virtual-tour-content .section-title {
+            color: var(--light-text);
+        }
+        
+        .virtual-tour-content .section-title:after {
+            background-color: var(--light-text);
+        }
+        
+        .virtual-tour-frame {
+            margin-top: 3rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            height: 450px;
+            position: relative;
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .virtual-tour-frame:hover {
+            transform: perspective(1000px) rotateX(0);
+        }
+        
+        .tour-placeholder {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .tour-placeholder i {
+            font-size: 4rem;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .tour-placeholder h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+        
+        .tour-placeholder p {
+            font-size: 1.1rem;
+            max-width: 80%;
+            margin: 0.5rem auto;
+        }
+        
+        .notification-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--warm-accent);
+            color: var(--light-text);
+            border-radius: 20px;
+            font-weight: 500;
+            margin-top: 1rem;
+            animation: fadeInOut 2s infinite;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        .image-count {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 2;
+        }
+        
+        .gallery-load-more {
+            display: block;
+            margin: 3rem auto 1rem;
+            padding: 0.8rem 2rem;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-load-more:hover {
+            background: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        @media (max-width: 1200px) {
+            .featured-item {
+                grid-column: span 1;
+                grid-row: span 1;
+                aspect-ratio: 1/1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+            
+            .gallery-item {
+                border-radius: 8px;
+            }
+            
+            .virtual-tour-frame {
+                height: 350px;
+            }
+            
+            .gallery-filter {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .gallery-item-overlay {
+                padding: 1rem;
+            }
+            
+            .gallery-item-title {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 0.75rem;
+            }
+            
+            .gallery-item-category {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+                top: 10px;
+                left: 10px;
+            }
+            
+            .gallery-item-overlay {
+                padding: 0.75rem;
+                height: 60%;
+            }
+            
+            .gallery-item-title {
+                font-size: 1rem;
+                margin-bottom: 0.25rem;
+            }
+            
+            .gallery-item-desc {
+                font-size: 0.8rem;
+            }
+            
+            .virtual-tour-frame {
+                height: 300px;
+            }
+            
+            .tour-placeholder h3 {
+                font-size: 1.5rem;
+            }
+            
+            .tour-placeholder p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.png" alt="Adventure Saria Logo" class="logo-img">
+                    <h1>Adventure Saria</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rooms.html">Rooms & Rates</a></li>
+                    <li><a href="adventures.html">Adventures</a></li>
+                    <li><a href="dining.html">Dining</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="book-now">
+                <a href="booking.html" class="book-now-btn">Book Now</a>
+            </div>
+            <button class="hamburger" type="button" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero gallery-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-wrapper">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">Photo Gallery</h1>
+                <p class="tagline">Experience the beauty of Adventure Saria and Gilgit-Baltistan</p>
+                <!-- Image preload for SEO and better management -->
+                <img src="assets/images/gallery-hero-placeholder.jpg" alt="Adventure Saria Hotel Gallery" class="hidden-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-intro" data-aos="fade-up">
+                <h2 class="section-title">Explore Our Gallery</h2>
+                <p>Browse through our collection of images showcasing our hotel, the stunning landscapes of Gilgit-Baltistan, and the unique cultural and adventure experiences we offer. Click on any image to enlarge.</p>
+                
+                <div class="gallery-category-counts">
+                    <span class="category-count">Hotel & Rooms (4)</span>
+                    <span class="category-count">Restaurant & Food (3)</span>
+                    <span class="category-count">Adventures (4)</span>
+                    <span class="category-count">Landscapes (4)</span>
+                    <span class="category-count">Cultural (4)</span>
+                </div>
+            </div>
+            
+            <div class="gallery-filters" data-aos="fade-up" data-aos-delay="100">
+                <div class="gallery-filter active" data-filter="all">All Photos</div>
+                <div class="gallery-filter" data-filter="hotel">Hotel & Rooms</div>
+                <div class="gallery-filter" data-filter="restaurant">Restaurant & Food</div>
+                <div class="gallery-filter" data-filter="adventures">Adventures</div>
+                <div class="gallery-filter" data-filter="landscape">Landscapes</div>
+                <div class="gallery-filter" data-filter="culture">Cultural</div>
+            </div>
+            
+            <div class="gallery-grid" id="lightgallery" data-aos="fade-up" data-aos-delay="200">
+                <!-- Featured Hotel Image -->
+                <a class="gallery-item featured-item" data-category="hotel" href="assets/images/hotel-exterior-placeholder.jpg" data-sub-html="<h4>Hotel Exterior</h4><p>Adventure Saria Hotel's mountain-inspired architecture nestled in Gilgit-Baltistan.</p>">
+                    <span class="gallery-item-category">Hotel</span>
+                    <span class="image-count"><i class="fas fa-image"></i></span>
+                    <img src="assets/images/hotel-exterior-placeholder.jpg" alt="Hotel Exterior">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Hotel Exterior</h3>
+                        <p class="gallery-item-desc">Our mountain-inspired architecture nestled in Gilgit-Baltistan</p>
+                    </div>
+                </a>
+                
+                <!-- Hotel & Rooms Images -->
+                <a class="gallery-item" data-category="hotel" href="assets/images/luxury-placeholder.jpg" data-sub-html="<h4>Luxury Suite Interior</h4><p>Our spacious luxury suite featuring premium furnishings and mountain views.</p>">
+                    <span class="gallery-item-category">Hotel</span>
+                    <img src="assets/images/luxury-placeholder.jpg" alt="Luxury Suite Interior">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Luxury Suite</h3>
+                        <p class="gallery-item-desc">Spacious with premium furnishings and views</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="hotel" href="assets/images/backgrounds/double-placeholder.jpg" data-sub-html="<h4>Double Bed Room</h4><p>Comfortable double bed room with traditional décor elements.</p>">
+                    <span class="gallery-item-category">Hotel</span>
+                    <img src="assets/images/backgrounds/double-placeholder.jpg" alt="Double Bed Room">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Double Bed Room</h3>
+                        <p class="gallery-item-desc">Comfortable room with traditional décor</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="hotel" href="assets/images/lobby-placeholder.jpg" data-sub-html="<h4>Hotel Lobby</h4><p>Our welcoming lobby featuring local artwork and comfortable seating areas.</p>">
+                    <span class="gallery-item-category">Hotel</span>
+                    <img src="assets/images/lobby-placeholder.jpg" alt="Hotel Lobby">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Hotel Lobby</h3>
+                        <p class="gallery-item-desc">Welcoming space with local artwork</p>
+                    </div>
+                </a>
+                
+                <!-- Featured Landscape Image -->
+                <a class="gallery-item featured-item" data-category="landscape" href="assets/images/landscape1-placeholder.jpg" data-sub-html="<h4>Rakaposhi Peak</h4><p>Stunning view of Rakaposhi Peak (7,788m) at sunset.</p>">
+                    <span class="gallery-item-category">Landscape</span>
+                    <span class="image-count"><i class="fas fa-image"></i></span>
+                    <img src="assets/images/landscape1-placeholder.jpg" alt="Rakaposhi Peak">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Rakaposhi Peak</h3>
+                        <p class="gallery-item-desc">Stunning view of Rakaposhi Peak (7,788m) at sunset</p>
+                    </div>
+                </a>
+                
+                <!-- Restaurant & Food Images -->
+                <a class="gallery-item" data-category="restaurant" href="assets/images/restaurant-placeholder.jpg" data-sub-html="<h4>Mountain View Restaurant</h4><p>Dining area with panoramic views of the Karakoram Range.</p>">
+                    <span class="gallery-item-category">Restaurant</span>
+                    <img src="assets/images/restaurant-placeholder.jpg" alt="Mountain View Restaurant">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Mountain View Restaurant</h3>
+                        <p class="gallery-item-desc">Dining with panoramic mountain views</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="restaurant" href="assets/images/chapshoro-placeholder.jpg" data-sub-html="<h4>Chapshoro</h4><p>Traditional Hunza meat pie, one of our chef's specialties.</p>">
+                    <span class="gallery-item-category">Food</span>
+                    <img src="assets/images/chapshoro-placeholder.jpg" alt="Chapshoro">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Chapshoro</h3>
+                        <p class="gallery-item-desc">Traditional Hunza meat pie specialty</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="restaurant" href="assets/images/trout-placeholder.jpg" data-sub-html="<h4>Pan-Seared Trout</h4><p>Locally caught trout prepared with mountain herbs and seasonal vegetables.</p>">
+                    <span class="gallery-item-category">Food</span>
+                    <img src="assets/images/trout-placeholder.jpg" alt="Pan-Seared Trout">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Pan-Seared Trout</h3>
+                        <p class="gallery-item-desc">Local catch with mountain herbs</p>
+                    </div>
+                </a>
+                
+                <!-- Adventures Images -->
+                <a class="gallery-item" data-category="adventures" href="assets/images/trekking-detail-placeholder.jpg" data-sub-html="<h4>Trekking in Rakaposhi</h4><p>Guided trek through the stunning landscapes near Rakaposhi Base Camp.</p>">
+                    <span class="gallery-item-category">Trekking</span>
+                    <img src="assets/images/trekking-detail-placeholder.jpg" alt="Trekking in Rakaposhi">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Trekking Adventures</h3>
+                        <p class="gallery-item-desc">Guided trek near Rakaposhi Base Camp</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="adventures" href="assets/images/rafting-detail-placeholder.jpg" data-sub-html="<h4>White Water Rafting</h4><p>Thrilling rafting experience on the mighty Indus River.</p>">
+                    <span class="gallery-item-category">Rafting</span>
+                    <img src="assets/images/rafting-detail-placeholder.jpg" alt="White Water Rafting">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">River Rafting</h3>
+                        <p class="gallery-item-desc">Thrilling experience on the Indus River</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="adventures" href="assets/images/climbing-detail-placeholder.jpg" data-sub-html="<h4>Mountain Climbing</h4><p>Experienced climbers scaling one of the majestic peaks in the Karakoram Range.</p>">
+                    <span class="gallery-item-category">Climbing</span>
+                    <img src="assets/images/climbing-detail-placeholder.jpg" alt="Mountain Climbing">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Mountain Climbing</h3>
+                        <p class="gallery-item-desc">Scaling majestic Karakoram peaks</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="adventures" href="assets/images/biking-detail-placeholder.jpg" data-sub-html="<h4>Mountain Biking</h4><p>Exploring Hunza Valley's scenic trails on mountain bikes.</p>">
+                    <span class="gallery-item-category">Biking</span>
+                    <img src="assets/images/biking-detail-placeholder.jpg" alt="Mountain Biking">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Mountain Biking</h3>
+                        <p class="gallery-item-desc">Exploring Hunza Valley's scenic trails</p>
+                    </div>
+                </a>
+                
+                <!-- Landscape Images -->
+                <a class="gallery-item" data-category="landscape" href="assets/images/landscape2-placeholder.jpg" data-sub-html="<h4>Hunza Valley</h4><p>Panoramic view of Hunza Valley during autumn with golden poplar trees.</p>">
+                    <span class="gallery-item-category">Landscape</span>
+                    <img src="assets/images/landscape2-placeholder.jpg" alt="Hunza Valley">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Hunza Valley</h3>
+                        <p class="gallery-item-desc">Autumn panorama with golden poplars</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="landscape" href="assets/images/landscape3-placeholder.jpg" data-sub-html="<h4>Attabad Lake</h4><p>The turquoise waters of Attabad Lake surrounded by mountains.</p>">
+                    <span class="gallery-item-category">Landscape</span>
+                    <img src="assets/images/landscape3-placeholder.jpg" alt="Attabad Lake">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Attabad Lake</h3>
+                        <p class="gallery-item-desc">Turquoise waters surrounded by mountains</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="landscape" href="assets/images/landscape4-placeholder.jpg" data-sub-html="<h4>Fairy Meadows</h4><p>The famous Fairy Meadows with Nanga Parbat in the background.</p>">
+                    <span class="gallery-item-category">Landscape</span>
+                    <img src="assets/images/landscape4-placeholder.jpg" alt="Fairy Meadows">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Fairy Meadows</h3>
+                        <p class="gallery-item-desc">With Nanga Parbat in the background</p>
+                    </div>
+                </a>
+                
+                <!-- Cultural Images -->
+                <a class="gallery-item" data-category="culture" href="assets/images/cultural1-placeholder.jpg" data-sub-html="<h4>Baltit Fort</h4><p>The historic Baltit Fort, over 700 years old, showcasing traditional Hunza architecture.</p>">
+                    <span class="gallery-item-category">Cultural</span>
+                    <img src="assets/images/cultural1-placeholder.jpg" alt="Baltit Fort">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Baltit Fort</h3>
+                        <p class="gallery-item-desc">Historic 700-year-old architecture</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="culture" href="assets/images/cultural2-placeholder.jpg" data-sub-html="<h4>Traditional Dance</h4><p>Local performers showcasing traditional Gilgit-Baltistani dance.</p>">
+                    <span class="gallery-item-category">Cultural</span>
+                    <img src="assets/images/cultural2-placeholder.jpg" alt="Traditional Dance">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Traditional Dance</h3>
+                        <p class="gallery-item-desc">Local performers in traditional attire</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="culture" href="assets/images/cultural3-placeholder.jpg" data-sub-html="<h4>Carpet Weaving</h4><p>Local artisan demonstrating traditional carpet weaving techniques.</p>">
+                    <span class="gallery-item-category">Cultural</span>
+                    <img src="assets/images/cultural3-placeholder.jpg" alt="Carpet Weaving">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Carpet Weaving</h3>
+                        <p class="gallery-item-desc">Traditional artisan techniques</p>
+                    </div>
+                </a>
+                
+                <a class="gallery-item" data-category="culture" href="assets/images/cultural4-placeholder.jpg" data-sub-html="<h4>Local Festival</h4><p>Colorful celebration during a traditional festival in Gilgit-Baltistan.</p>">
+                    <span class="gallery-item-category">Cultural</span>
+                    <img src="assets/images/cultural4-placeholder.jpg" alt="Local Festival">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">Local Festival</h3>
+                        <p class="gallery-item-desc">Colorful traditional celebrations</p>
+                    </div>
+                </a>
+            </div>
+            
+            <button class="gallery-load-more" data-aos="fade-up">Load More Photos</button>
+        </div>
+    </section>
+
+    <!-- Virtual Tour Section -->
+    <section class="virtual-tour-section">
+        <div class="container">
+            <div class="virtual-tour-content" data-aos="fade-up">
+                <h2 class="section-title">Virtual Tour</h2>
+                <p>Experience Adventure Saria Hotel from anywhere in the world with our immersive virtual tour. Navigate through our hotel facilities, guest rooms, restaurant, and common areas to get a feel for our unique mountain retreat before your visit.</p>
+                
+                <div class="virtual-tour-frame" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tour-placeholder">
+                        <i class="fas fa-vr-cardboard"></i>
+                        <h3>Virtual Tour Coming Soon!</h3>
+                        <p>We're currently developing an immersive 360° virtual tour of our hotel and surroundings.</p>
+                        <p>Check back soon for this exciting feature or contact us for more information.</p>
+                        <span class="notification-badge">Summer 2025</span>
+                    </div>
+                    <!-- In a real implementation, this would be replaced with a 360° virtual tour iframe -->
+                    <!-- <iframe src="virtual-tour.html" title="Virtual Tour of Adventure Saria Hotel"></iframe> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Adventure Saria</h2>
+                    <p>Discover Beauty and Adventure</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="rooms.html">Rooms & Rates</a></li>
+                        <li><a href="adventures.html">Adventures</a></li>
+                        <li><a href="dining.html">Dining</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Adventure Saria Hotel, Gilgit-Baltistan, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92 XXXXXXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@adventuresaria.com</p>
+                </div>
+                <div class="social-media">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Adventure Saria Hotel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LightGallery JS -->
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/lightgallery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/plugins/thumbnail/lg-thumbnail.min.js"></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease',
+                once: true,
+                offset: 100
+            });
+            
+            // Initialize LightGallery
+            const lightGallery = document.getElementById('lightgallery');
+            if (lightGallery) {
+                lightGallery.addEventListener('lgInit', function() {
+                    console.log('Gallery initialized');
+                });
+                
+                const gallery = window.lightGallery(lightGallery, {
+                    speed: 500,
+                    plugins: [lgZoom, lgThumbnail],
+                    selector: '.gallery-item',
+                    download: false,
+                    counter: true,
+                    thumbnail: true,
+                    animateThumb: true,
+                    showThumbByDefault: true
+                });
+            }
+            
+            // Gallery Filtering with animation
+            const galleryFilters = document.querySelectorAll('.gallery-filter');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            galleryFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Update active filter
+                    galleryFilters.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide gallery items based on filter with animation
+                    galleryItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        if (filterValue === 'all' || category === filterValue) {
+                            item.classList.remove('hidden');
+                            setTimeout(() => {
+                                item.style.opacity = 1;
+                                item.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            item.style.opacity = 0;
+                            item.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                item.classList.add('hidden');
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Load more button (simulation)
+            const loadMoreBtn = document.querySelector('.gallery-load-more');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    // In a real implementation, this would load more images from the server
+                    // For now, we'll just change the button text to indicate it's working
+                    this.innerHTML = 'All Photos Loaded';
+                    this.disabled = true;
+                    this.style.backgroundColor = 'var(--gray-text)';
+                    
+                    setTimeout(() => {
+                        this.style.display = 'none';
+                    }, 2000);
+                });
+            }
+            
+            // Mobile Navigation Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const body = document.querySelector('body');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    body.classList.toggle('menu-open');
+                });
+            }
+            
+            // Add masonry effect by adjusting image aspect ratio randomly
+            // This creates a more dynamic, pinterest-style layout
+            galleryItems.forEach(item => {
+                if (!item.classList.contains('featured-item')) {
+                    // Random aspect ratio for non-featured items
+                    const random = Math.random();
+                    if (random > 0.7) {
+                        item.style.aspectRatio = '3/4';  // Portrait
+                    } else if (random < 0.3) {
+                        item.style.aspectRatio = '4/3';  // Landscape
+                    }
+                    // Others stay 1/1 (square)
+                }
+            });
+        });
+    </script>
+    <script src="assets/js/chatbot.js"></script>
+    
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923144259666" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

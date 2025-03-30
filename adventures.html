@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore exciting adventure activities in Gilgit-Baltistan with Adventure Saria Hotel - trekking, climbing, rafting, cultural excursions and more.">
+    <title>Adventure Activities - Adventure Saria Hotel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Additional styles specific to Adventures page */
+        .adventures-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/images/adventures-hero-placeholder.jpg');
+            height: 70vh;
+        }
+        
+        .adventure-section {
+            padding: 4rem 0;
+        }
+        
+        .adventure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .adventure-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--snow-white);
+        }
+        
+        .adventure-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .adventure-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .adventure-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .adventure-card:hover .adventure-image img {
+            transform: scale(1.1);
+        }
+        
+        .adventure-content {
+            padding: 1.5rem;
+        }
+        
+        .adventure-title {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .adventure-description {
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .adventure-info {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+            color: var(--dark-blue);
+            font-weight: 500;
+        }
+        
+        .adventure-info span {
+            display: flex;
+            align-items: center;
+        }
+        
+        .adventure-info i {
+            margin-right: 0.5rem;
+            color: var(--warm-accent);
+        }
+        
+        .adventure-cta {
+            margin-top: 1rem;
+        }
+        
+        .adventure-btn {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .adventure-btn:hover {
+            background-color: var(--dark-blue);
+            color: var(--light-text);
+            transform: translateY(-3px);
+        }
+        
+        .difficulty {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .easy {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .moderate {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .challenging {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .adventure-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .adventure-detail-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .adventure-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .adventure-detail-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .adventure-detail-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .adventure-detail-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .adventure-detail-list li:before {
+            content: "•";
+            color: var(--primary-blue);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .included-list, .excluded-list {
+            list-style: none;
+        }
+        
+        .included-list li, .excluded-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.25rem;
+        }
+        
+        .included-list li:before {
+            content: "✓";
+            color: green;
+            position: absolute;
+            left: 0;
+        }
+        
+        .excluded-list li:before {
+            content: "✕";
+            color: red;
+            position: absolute;
+            left: 0;
+        }
+        
+        .adventure-planner {
+            background-color: var(--light-blue);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .adventure-planner-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .adventure-detail {
+                flex-direction: column;
+            }
+            
+            .adventure-detail-image {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo.png" alt="Adventure Saria Logo" class="logo-img">
+                    <h1>Adventure Saria</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rooms.html">Rooms & Rates</a></li>
+                    <li><a href="adventures.html" class="active">Adventures</a></li>
+                    <li><a href="dining.html">Dining</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="book-now">
+                <a href="booking.html" class="book-now-btn">Book Now</a>
+            </div>
+            <button class="hamburger" type="button" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero adventures-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content-wrapper">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">Adventure Activities</h1>
+                <p class="tagline">Discover the natural wonders of Gilgit-Baltistan with our guided adventures</p>
+                <!-- Image preload for SEO and better management -->
+                <img src="assets/images/adventures-hero-placeholder.jpg" alt="Adventure activities in Gilgit-Baltistan" class="hidden-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="adventure-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2 class="section-title">Explore the Roof of the World</h2>
+                <p>Adventure Saria is ideally located in one of the most spectacular regions on earth, offering access to majestic mountains, pristine valleys, ancient glaciers, and rich cultural experiences. Our curated adventure activities cater to all levels of adventure seekers, from beginners to experienced explorers.</p>
+                <p>Each adventure is led by our highly experienced local guides who have extensive knowledge of the terrain, weather patterns, and cultural heritage of the region. Safety is our top priority, and all necessary equipment is provided to ensure an unforgettable and secure experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adventure Activities Grid -->
+    <section class="adventure-section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Our Adventure Activities</h2>
+            
+            <div class="adventure-grid">
+                <!-- Trekking -->
+                <div class="adventure-card">
+                    <div class="adventure-image">
+                        <img src="assets/images/trekking-placeholder.jpg" alt="Trekking in Gilgit-Baltistan">
+                    </div>
+                    <div class="adventure-content">
+                        <span class="difficulty moderate">Moderate</span>
+                        <h3 class="adventure-title">Trekking Expeditions</h3>
+                        <p class="adventure-description">Explore hidden valleys, mountain passes, and pristine landscapes on our guided trekking expeditions. Suitable for both beginners and experienced hikers.</p>
+                        <div class="adventure-info">
+                            <span><i class="far fa-clock"></i> 1-5 days</span>
+                            <span><i class="fas fa-tag"></i> From 5,000 PKR</span>
+                        </div>
+                        <div class="adventure-cta">
+                            <a href="#trekking" class="adventure-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mountain Climbing -->
+                <div class="adventure-card">
+                    <div class="adventure-image">
+                        <img src="assets/images/climbing-placeholder.jpg" alt="Mountain Climbing in Karakoram">
+                    </div>
+                    <div class="adventure-content">
+                        <span class="difficulty challenging">Challenging</span>
+                        <h3 class="adventure-title">Mountain Climbing</h3>
+                        <p class="adventure-description">Challenge yourself with guided climbs up some of the most spectacular peaks in the Karakoram range, suitable for experienced climbers.</p>
+                        <div class="adventure-info">
+                            <span><i class="far fa-clock"></i> 3-10 days</span>
+                            <span><i class="fas fa-tag"></i> From 15,000 PKR</span>
+                        </div>
+                        <div class="adventure-cta">
+                            <a href="#climbing" class="adventure-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- River Rafting -->
+                <div class="adventure-card">
+                    <div class="adventure-image">
+                        <img src="assets/images/rafting-placeholder.jpg" alt="White Water Rafting">
+                    </div>
+                    <div class="adventure-content">
+                        <span class="difficulty moderate">Moderate</span>
+                        <h3 class="adventure-title">White Water Rafting</h3>
+                        <p class="adventure-description">Experience the thrill of rafting down the mighty Indus River, navigating through exciting rapids while enjoying stunning mountain views.</p>
+                        <div class="adventure-info">
+                            <span><i class="far fa-clock"></i> Half/Full Day</span>
+                            <span><i class="fas fa-tag"></i> From 3,000 PKR</span>
+                        </div>
+                        <div class="adventure-cta">
+                            <a href="#rafting" class="adventure-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mountain Biking -->
+                <div class="adventure-card">
+                    <div class="adventure-image">
+                        <img src="assets/images/biking-placeholder.jpg" alt="Mountain Biking">
+                    </div>
+                    <div class="adventure-content">
+                        <span class="difficulty moderate">Moderate</span>
+                        <h3 class="adventure-title">Mountain Biking</h3>
+                        <p class="adventure-description">Discover the region's natural beauty on two wheels as you ride along scenic trails through villages, meadows, and mountain paths.</p>
+                        <div class="adventure-info">
+                            <span><i class="far fa-clock"></i> Half/Full Day</span>
+                            <span><i class="fas fa-tag"></i> From 2,500 PKR</span>
+                        </div>
+                        <div class="adventure-cta">
+                            <a href="#biking" class="adventure-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cultural Tours -->
+                <div class="adventure-card">
+                    <div class="adventure-image">
+                        <img src="assets/images/culture-placeholder.jpg" alt="Cultural Tours">
+                    </div>
+                    <div class="adventure-content">
+                        <span class="difficulty easy">Easy</span>
+                        <h3 class="adventure-title">Cultural Tours</h3>
+                        <p class="adventure-description">Immerse yourself in the rich cultural heritage of Gilgit-Baltistan with visits to local villages, ancient forts, and historical sites.</p>
+                        <div class="adventure-info">
+                            <span><i class="far fa-clock"></i> Half/Full Day</span>
+                            <span><i class="fas fa-tag"></i> From 2,000 PKR</span>
+                        </div>
+                        <div class="adventure-cta">
+                            <a href="#cultural" class="adventure-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Photography Tours -->
+                <div class="adventure-card">
+                    <div class="adventure-image">
+                        <img src="assets/images/photography-placeholder.jpg" alt="Photography Tours">
+                    </div>
+                    <div class="adventure-content">
+                        <span class="difficulty easy">Easy</span>
+                        <h3 class="adventure-title">Photography Tours</h3>
+                        <p class="adventure-description">Capture the breathtaking landscapes and unique cultural moments with our specialized photography tours guided by local experts.</p>
+                        <div class="adventure-info">
+                            <span><i class="far fa-clock"></i> Half/Full Day</span>
+                            <span><i class="fas fa-tag"></i> From 2,500 PKR</span>
+                        </div>
+                        <div class="adventure-cta">
+                            <a href="#photography" class="adventure-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Adventure Details Sections -->
+    <section class="adventure-section" id="trekking">
+        <div class="container">
+            <h2 class="section-title">Trekking Expeditions</h2>
+            
+            <div class="adventure-detail">
+                <div class="adventure-detail-image">
+                    <img src="assets/images/trekking-detail-placeholder.jpg" alt="Trekking in Rakaposhi Base Camp">
+                </div>
+                <div class="adventure-detail-content">
+                    <h3>Experience the Magic of Gilgit-Baltistan on Foot</h3>
+                    <p>Our trekking expeditions take you through some of the most spectacular landscapes on earth. From day hikes to multi-day treks, we offer adventures suitable for all experience levels.</p>
+                    
+                    <h4>Popular Trekking Routes:</h4>
+                    <ul class="adventure-detail-list">
+                        <li>Fairy Meadows and Nanga Parbat Base Camp (3-4 days)</li>
+                        <li>Rakaposhi Base Camp Trek (2-3 days)</li>
+                        <li>Naltar Valley Trek (1-2 days)</li>
+                        <li>Shimshal Pass Trek (5-7 days)</li>
+                        <li>Hunza Valley Cultural Trek (1-3 days)</li>
+                    </ul>
+                    
+                    <h4>What's Included:</h4>
+                    <ul class="included-list">
+                        <li>Professional local guide</li>
+                        <li>Camping equipment (for multi-day treks)</li>
+                        <li>Meals during the trek</li>
+                        <li>Porter assistance for luggage</li>
+                        <li>First aid kit and safety equipment</li>
+                    </ul>
+                    
+                    <h4>What to Bring:</h4>
+                    <ul class="adventure-detail-list">
+                        <li>Sturdy hiking boots</li>
+                        <li>Weather-appropriate clothing (layers recommended)</li>
+                        <li>Personal medications</li>
+                        <li>Camera</li>
+                        <li>Sunscreen and sunglasses</li>
+                    </ul>
+                    
+                    <a href="booking.html" class="book-now-btn">Book This Adventure</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="adventure-section" id="climbing" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Mountain Climbing</h2>
+            
+            <div class="adventure-detail">
+                <div class="adventure-detail-content">
+                    <h3>Conquer the Mighty Peaks of the Karakoram</h3>
+                    <p>The Karakoram Range offers some of the world's most challenging and rewarding mountain climbing experiences. Our expert guides will lead you safely through these epic adventures.</p>
+                    
+                    <h4>Climbing Expeditions:</h4>
+                    <ul class="adventure-detail-list">
+                        <li>Spantik Peak (7,027m) - Technical Climb (10-14 days)</li>
+                        <li>Diran Peak (7,257m) - Challenging Expedition (12-16 days)</li>
+                        <li>Laila Peak (6,096m) - Iconic Ski Mountaineering (8-12 days)</li>
+                        <li>Rush Peak (5,098m) - Beginner Friendly Expedition (5-7 days)</li>
+                    </ul>
+                    
+                    <h4>Requirements:</h4>
+                    <p>Mountain climbing requires previous experience and physical fitness. Our team will assess your skill level and recommend appropriate expeditions. We offer preparatory training for those who need it.</p>
+                    
+                    <h4>What's Included:</h4>
+                    <ul class="included-list">
+                        <li>Professional climbing guides</li>
+                        <li>Technical climbing equipment</li>
+                        <li>High-altitude camps and equipment</li>
+                        <li>Meals during the expedition</li>
+                        <li>Permits and administrative support</li>
+                    </ul>
+                    
+                    <h4>What's Not Included:</h4>
+                    <ul class="excluded-list">
+                        <li>Personal climbing gear</li>
+                        <li>International travel insurance</li>
+                        <li>Personal expenses</li>
+                    </ul>
+                    
+                    <a href="booking.html" class="book-now-btn">Book This Adventure</a>
+                </div>
+                <div class="adventure-detail-image">
+                    <img src="assets/images/climbing-detail-placeholder.jpg" alt="Climbers on a snow-capped peak">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="adventure-section" id="rafting">
+        <div class="container">
+            <h2 class="section-title">White Water Rafting</h2>
+            
+            <div class="adventure-detail">
+                <div class="adventure-detail-image">
+                    <img src="assets/images/rafting-detail-placeholder.jpg" alt="Rafting on the Indus River">
+                </div>
+                <div class="adventure-detail-content">
+                    <h3>Navigate the Thrilling Rapids of the Indus River</h3>
+                    <p>Experience the adrenaline rush of white water rafting on the mighty Indus River, one of the most legendary rivers in Asia. Our rafting adventures offer a unique perspective of the stunning gorges and valleys.</p>
+                    
+                    <h4>Rafting Options:</h4>
+                    <ul class="adventure-detail-list">
+                        <li>Beginners' Course: Class I-II Rapids (2 hours)</li>
+                        <li>Half-Day Adventure: Class II-III Rapids (4 hours)</li>
+                        <li>Full-Day Experience: Class III-IV Rapids with lunch (7 hours)</li>
+                        <li>Multi-Day Expedition: Full river journey with camping (2-3 days)</li>
+                    </ul>
+                    
+                    <h4>What's Included:</h4>
+                    <ul class="included-list">
+                        <li>Professional river guides</li>
+                        <li>All rafting equipment (boats, paddles, helmets)</li>
+                        <li>Safety gear and life jackets</li>
+                        <li>Refreshments (water, snacks)</li>
+                        <li>Meals (for full-day and multi-day options)</li>
+                        <li>Transportation to and from the river</li>
+                    </ul>
+                    
+                    <p><strong>Note:</strong> No previous rafting experience is necessary for beginners' and half-day adventures. Children above 12 years are welcome on the beginner course.</p>
+                    
+                    <a href="booking.html" class="book-now-btn">Book This Adventure</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="adventure-section" id="biking" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Mountain Biking</h2>
+            
+            <div class="adventure-detail">
+                <div class="adventure-detail-content">
+                    <h3>Explore on Two Wheels</h3>
+                    <p>Discover the breathtaking landscapes of Gilgit-Baltistan on mountain bikes. Our guided biking tours take you through scenic trails, local villages, and spectacular mountain views.</p>
+                    
+                    <h4>Biking Routes:</h4>
+                    <ul class="adventure-detail-list">
+                        <li>Hunza Valley Circuit (Full day, 25-30km)</li>
+                        <li>Naltar Forest Trail (Half day, 15km)</li>
+                        <li>Karimabad - Altit Loop (Half day, 10-12km)</li>
+                        <li>Shigar Valley Exploration (Full day, 20-25km)</li>
+                    </ul>
+                    
+                    <h4>What's Included:</h4>
+                    <ul class="included-list">
+                        <li>High-quality mountain bikes</li>
+                        <li>Helmets and safety gear</li>
+                        <li>Local guide familiar with all trails</li>
+                        <li>Support vehicle (for full-day trips)</li>
+                        <li>Refreshments and lunch (for full-day trips)</li>
+                    </ul>
+                    
+                    <p>Suitable for intermediate riders with basic mountain biking experience. Custom routes can be arranged for beginners or advanced riders upon request.</p>
+                    
+                    <a href="booking.html" class="book-now-btn">Book This Adventure</a>
+                </div>
+                <div class="adventure-detail-image">
+                    <img src="assets/images/biking-detail-placeholder.jpg" alt="Mountain biking through a scenic trail">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="adventure-section" id="cultural">
+        <div class="container">
+            <h2 class="section-title">Cultural Tours</h2>
+            
+            <div class="adventure-detail">
+                <div class="adventure-detail-image">
+                    <img src="assets/images/cultural-detail-placeholder.jpg" alt="Traditional Baltistan cultural celebration">
+                </div>
+                <div class="adventure-detail-content">
+                    <h3>Immerse in Rich Local Traditions</h3>
+                    <p>The cultural landscape of Gilgit-Baltistan is as diverse and captivating as its natural beauty. Our cultural tours provide authentic experiences and meaningful interactions with local communities.</p>
+                    
+                    <h4>Cultural Experiences:</h4>
+                    <ul class="adventure-detail-list">
+                        <li>Ancient Forts Tour (Altit & Baltit Forts)</li>
+                        <li>Traditional Crafts Workshops (carpet weaving, embroidery)</li>
+                        <li>Village Homestay Experience</li>
+                        <li>Local Cuisine Cooking Class</li>
+                        <li>Festival Celebrations (seasonal)</li>
+                    </ul>
+                    
+                    <h4>What's Included:</h4>
+                    <ul class="included-list">
+                        <li>Knowledgeable cultural guide</li>
+                        <li>Site entrance fees</li>
+                        <li>Traditional meals</li>
+                        <li>Workshop materials (where applicable)</li>
+                        <li>Transportation between sites</li>
+                    </ul>
+                    
+                    <p>These tours provide economic support directly to local communities and help preserve traditional practices and heritage.</p>
+                    
+                    <a href="booking.html" class="book-now-btn">Book This Adventure</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="adventure-section" id="photography" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Photography Tours</h2>
+            
+            <div class="adventure-detail">
+                <div class="adventure-detail-content">
+                    <h3>Capture the Beauty of the Karakoram</h3>
+                    <p>Our specialized photography tours are designed to help you capture the magnificent landscapes, unique cultural moments, and spectacular light conditions that make Gilgit-Baltistan a photographer's paradise.</p>
+                    
+                    <h4>Photography Experiences:</h4>
+                    <ul class="adventure-detail-list">
+                        <li>Sunset/Sunrise Mountain Photography (Rakaposhi, Ultar, Hunza)</li>
+                        <li>Cultural Portrait Photography in Traditional Villages</li>
+                        <li>Night Sky & Star Trail Photography</li>
+                        <li>Wildlife Photography Excursions</li>
+                        <li>Seasonal Photography (Autumn colors, Spring blossoms)</li>
+                    </ul>
+                    
+                    <h4>What's Included:</h4>
+                    <ul class="included-list">
+                        <li>Photography guide who knows the best locations and lighting</li>
+                        <li>Transportation to photography spots</li>
+                        <li>Permits for special access areas</li>
+                        <li>Refreshments during the tour</li>
+                    </ul>
+                    
+                    <p>Bring your own camera equipment. Our guides can provide advice on settings and composition but specialized photography training is not included.</p>
+                    
+                    <a href="booking.html" class="book-now-btn">Book This Adventure</a>
+                </div>
+                <div class="adventure-detail-image">
+                    <img src="assets/images/photography-detail-placeholder.jpg" alt="Photographer capturing mountain sunset">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Adventure Planner Section -->
+    <section class="adventure-planner">
+        <div class="container">
+            <div class="adventure-planner-content">
+                <h2 class="section-title">Custom Adventure Planner</h2>
+                <p>Looking for a personalized adventure experience? We can create a custom itinerary based on your interests, fitness level, and time available.</p>
+                <p>Our expert adventure consultants will work with you to design the perfect combination of activities, accommodations, and cultural experiences.</p>
+                <a href="contact.html" class="book-now-btn">Contact Our Adventure Team</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>Adventure Saria</h2>
+                    <p>Discover Beauty and Adventure</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="rooms.html">Rooms & Rates</a></li>
+                        <li><a href="adventures.html">Adventures</a></li>
+                        <li><a href="dining.html">Dining</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Adventure Saria Hotel, Gilgit-Baltistan, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92 XXXXXXXXXX</p>
+                    <p><i class="fas fa-envelope"></i> info@adventuresaria.com</p>
+                </div>
+                <div class="social-media">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Adventure Saria Hotel. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
+    
+    <script>
+        // Direct hamburger menu functionality for this page
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    hamburger.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    
+                    console.log('Hamburger menu toggled on adventures.html');
+                });
+            }
+        });
+    </script>
+    <script src="assets/js/chatbot.js"></script>
+    
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/923144259666" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

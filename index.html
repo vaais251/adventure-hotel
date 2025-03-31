@@ -127,10 +127,15 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section" data-aos="fade-up">
+    <section class="stats-section parallax-bg" data-aos="fade-up">
         <div class="container">
-            <h2 class="section-title">Adventure Saria By The Numbers</h2>
-            <p class="section-subtitle">Celebrating years of excellence in hospitality and adventure</p>
+            <div class="section-header">
+                <h2 class="section-title"><span class="highlight">Adventure Saria</span> By The Numbers</h2>
+                <p class="section-subtitle">Celebrating years of excellence in hospitality and adventure</p>
+                <div class="section-divider">
+                    <span><i class="fas fa-mountain"></i></span>
+                </div>
+            </div>
             <div class="stats-container">
                 <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
                     <i class="fas fa-mountain"></i>
@@ -673,5 +678,138 @@
     <a href="https://wa.me/923144259666" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
     </a>
+    
+    <!-- Fix for Stats Counter Animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Counter Animation for Stats Section
+            const counters = document.querySelectorAll('.counter-value');
+            
+            function startCounterAnimation() {
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000; // ms
+                    const increment = target / (duration / 30); // Update every 30ms
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current);
+                            setTimeout(updateCounter, 30);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    };
+                    
+                    updateCounter();
+                });
+            }
+            
+            // Check if elements are already in viewport on page load
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) {
+                const checkIfInView = function() {
+                    const rect = statsSection.getBoundingClientRect();
+                    const isInViewport = (
+                        rect.top <= (window.innerHeight || document.documentElement.clientHeight) && 
+                        rect.bottom >= 0
+                    );
+                    
+                    if (isInViewport) {
+                        startCounterAnimation();
+                        window.removeEventListener('scroll', checkIfInView);
+                    }
+                };
+                
+                // Initial check
+                checkIfInView();
+                
+                // Add scroll event listener
+                window.addEventListener('scroll', checkIfInView);
+            }
+        });
+    </script>
+    
+    <!-- Fix for Testimonial Slider Buttons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fix for Testimonial Slider
+            const testimonialContainer = document.querySelector('.testimonial-slider');
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const dots = document.querySelectorAll('.testimonial-dots .dot');
+            
+            if (testimonialSlides.length > 0 && prevBtn && nextBtn) {
+                let currentSlide = 0;
+                const maxSlide = testimonialSlides.length - 1;
+                
+                // Function to update slide position
+                function updateSlidePosition() {
+                    testimonialSlides.forEach((slide, index) => {
+                        slide.classList.remove('active');
+                        if (index === currentSlide) {
+                            slide.classList.add('active');
+                        }
+                    });
+                    
+                    // Update dots
+                    dots.forEach((dot, index) => {
+                        if (index === currentSlide) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                }
+                
+                // Next button click
+                nextBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentSlide = currentSlide === maxSlide ? 0 : currentSlide + 1;
+                    updateSlidePosition();
+                    console.log('Next button clicked, now showing slide:', currentSlide);
+                });
+                
+                // Previous button click
+                prevBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentSlide = currentSlide === 0 ? maxSlide : currentSlide - 1;
+                    updateSlidePosition();
+                    console.log('Previous button clicked, now showing slide:', currentSlide);
+                });
+                
+                // Dot navigation
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = index;
+                        updateSlidePosition();
+                    });
+                });
+                
+                // Auto-advance slides every 7 seconds
+                let slideInterval = setInterval(() => {
+                    currentSlide = currentSlide === maxSlide ? 0 : currentSlide + 1;
+                    updateSlidePosition();
+                }, 7000);
+                
+                // Pause auto-advance when hovering over testimonials
+                if (testimonialContainer) {
+                    testimonialContainer.addEventListener('mouseenter', () => {
+                        clearInterval(slideInterval);
+                    });
+                    
+                    // Resume auto-advance when mouse leaves testimonials
+                    testimonialContainer.addEventListener('mouseleave', () => {
+                        slideInterval = setInterval(() => {
+                            currentSlide = currentSlide === maxSlide ? 0 : currentSlide + 1;
+                            updateSlidePosition();
+                        }, 7000);
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>

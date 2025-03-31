@@ -450,24 +450,35 @@
             }
         });
     </script>
-    <script src="assets/js/chatbot.js"></script>
     
+    <!-- Direct hamburger menu implementation to ensure it works -->
     <script>
-        // Direct hamburger menu functionality for this page
         document.addEventListener('DOMContentLoaded', function() {
+            // Direct hamburger implementation
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             
             if (hamburger && navLinks) {
-                hamburger.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    hamburger.classList.toggle('active');
+                console.log("Hamburger menu elements found - direct implementation (booking.html)");
+                
+                hamburger.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.classList.toggle('active');
                     navLinks.classList.toggle('active');
-                    
-                    console.log('Hamburger menu toggled on booking.html');
+                    console.log("Hamburger clicked - classes toggled");
                 });
+                
+                // Close menu when clicking on links
+                const navLinkItems = navLinks.querySelectorAll('a');
+                navLinkItems.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+            } else {
+                console.error("Hamburger menu elements not found");
             }
         });
     </script>
@@ -476,5 +487,30 @@
     <a href="https://wa.me/923144259666" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
     </a>
+    
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+        <div class="chat-icon">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chatbot">
+            <div class="chat-header">
+                <h4>Adventure Saria Chat</h4>
+                <span class="close-chat">&times;</span>
+            </div>
+            <div class="chat-messages">
+                <div class="message bot-message">
+                    Hello! Welcome to Adventure Saria Hotel. How can I help you today?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message...">
+                <button><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chatbot Script (Optimized) -->
+    <script src="assets/js/optimized/chatbot.min.js"></script>
 </body>
 </html>

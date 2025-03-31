@@ -6,9 +6,19 @@
     <meta name="description" content="Browse our gallery of Adventure Saria Hotel in Gilgit-Baltistan - see our accommodations, restaurant, and the stunning mountain landscapes of Pakistan's northern region.">
     <title>Gallery - Adventure Saria Hotel</title>
     
-    <!-- Google Fonts -->
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/images/logo.png">
+    <link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
+    
+    <!-- Preconnect to external domains for faster resource loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for icons -->
@@ -713,7 +723,7 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <h2>Adventure Saria</h2>
-                    <p>Discover Beauty and Adventure</p>
+                    <p>Gilgit-Baltistan, Pakistan</p>
                 </div>
                 <div class="footer-links">
                     <h3>Quick Links</h3>
@@ -728,27 +738,30 @@
                     </ul>
                 </div>
                 <div class="footer-contact">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Adventure Saria Hotel, Gilgit-Baltistan, Pakistan</p>
-                    <p><i class="fas fa-phone"></i> +92 XXXXXXXXXX</p>
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Gilgit-Baltistan, Pakistan</p>
+                    <p><i class="fas fa-phone"></i> +92-314-425-9666</p>
                     <p><i class="fas fa-envelope"></i> info@adventuresaria.com</p>
                 </div>
                 <div class="social-media">
                     <h3>Follow Us</h3>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-tripadvisor"></i></a>
                     </div>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Adventure Saria Hotel. All Rights Reserved.</p>
+                <p>&copy; 2025 Adventure Saria. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
+    
+    <!-- jQuery (needed for LightGallery) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <!-- LightGallery JS -->
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/lightgallery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.4.0/plugins/zoom/lg-zoom.min.js"></script>
@@ -757,8 +770,39 @@
     <!-- AOS JS -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     
-    <!-- Custom JS -->
-    <script src="assets/js/script.js"></script>
+    <!-- Hamburger menu implementation (priority) -->
+    <script>
+        // Execute immediately to avoid delay
+        (function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                console.log("Hamburger menu elements found - immediate setup");
+                
+                hamburger.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    console.log("Hamburger clicked - classes toggled");
+                });
+                
+                // Close menu when clicking on links
+                const navLinkItems = navLinks.querySelectorAll('a');
+                navLinkItems.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+            } else {
+                console.error("Hamburger menu elements not found");
+            }
+        })();
+    </script>
+    
+    <!-- Gallery initialization -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize AOS
@@ -769,23 +813,34 @@
                 offset: 100
             });
             
-            // Initialize LightGallery
-            const lightGallery = document.getElementById('lightgallery');
-            if (lightGallery) {
-                lightGallery.addEventListener('lgInit', function() {
-                    console.log('Gallery initialized');
-                });
-                
-                const gallery = window.lightGallery(lightGallery, {
-                    speed: 500,
-                    plugins: [lgZoom, lgThumbnail],
-                    selector: '.gallery-item',
-                    download: false,
-                    counter: true,
-                    thumbnail: true,
-                    animateThumb: true,
-                    showThumbByDefault: true
-                });
+            // Initialize LightGallery with error handling
+            try {
+                const lightGallery = document.getElementById('lightgallery');
+                if (lightGallery) {
+                    console.log("LightGallery element found, initializing...");
+                    
+                    if (typeof window.lightGallery !== 'function') {
+                        console.error("LightGallery library not loaded properly");
+                        return;
+                    }
+                    
+                    const gallery = window.lightGallery(lightGallery, {
+                        speed: 500,
+                        plugins: [lgZoom, lgThumbnail],
+                        selector: '.gallery-item',
+                        download: false,
+                        counter: true,
+                        thumbnail: true,
+                        animateThumb: true,
+                        showThumbByDefault: true
+                    });
+                    
+                    console.log("LightGallery initialized successfully");
+                } else {
+                    console.error("LightGallery element not found");
+                }
+            } catch (error) {
+                console.error("Error initializing LightGallery:", error);
             }
             
             // Gallery Filtering with animation
@@ -799,6 +854,7 @@
                     this.classList.add('active');
                     
                     const filterValue = this.getAttribute('data-filter');
+                    console.log("Gallery filter clicked:", filterValue);
                     
                     // Show/hide gallery items based on filter with animation
                     galleryItems.forEach(item => {
@@ -852,7 +908,6 @@
             });
         });
     </script>
-    <script src="assets/js/chatbot.js"></script>
     
     <!-- WhatsApp Button -->
     <a href="https://wa.me/923144259666" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">

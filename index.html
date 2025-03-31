@@ -592,7 +592,53 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/aos.js"></script>
+    
+    <!-- Preloader Timeout -->
+    <script>
+        // Safety timeout for preloader
+        setTimeout(function() {
+            const preloader = document.querySelector('.preloader');
+            if (preloader && preloader.style.display !== 'none') {
+                preloader.style.display = 'none';
+                console.log('Preloader hidden by safety timeout');
+            }
+        }, 3000);
+    </script>
+    
+    <!-- Direct hamburger menu implementation to ensure it works -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Direct hamburger implementation
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                console.log("Hamburger menu elements found - direct implementation");
+                
+                hamburger.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    console.log("Hamburger clicked - classes toggled");
+                });
+                
+                // Close menu when clicking on links
+                const navLinkItems = navLinks.querySelectorAll('a');
+                navLinkItems.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+            } else {
+                console.error("Hamburger menu elements not found");
+            }
+        });
+    </script>
+    
+    <!-- Main Script (Optimized) -->
     <script src="assets/js/optimized/script.min.js"></script>
+    
     <script src="assets/js/chatbot-fixed.js"></script>
     
     <!-- Direct Testimonial Slider Implementation -->
@@ -763,18 +809,6 @@
                 observer.observe(statsSection);
             }
         });
-    </script>
-    
-    <!-- Preloader Timeout -->
-    <script>
-        // Safety timeout for preloader
-        setTimeout(function() {
-            const preloader = document.querySelector('.preloader');
-            if (preloader && preloader.style.display !== 'none') {
-                preloader.style.display = 'none';
-                console.log('Preloader hidden by safety timeout');
-            }
-        }, 3000);
     </script>
 </body>
 </html>
